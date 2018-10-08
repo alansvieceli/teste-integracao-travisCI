@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.alanvieceli.api.utils.SenhaUtils;
+
 @SpringBootApplication
 public class TesteIntegradoComTravisCiApplication {
 	
@@ -19,7 +21,16 @@ public class TesteIntegradoComTravisCiApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner() {
 		return args ->{
-			System.out.println("### Quantidade de elementos por página = " + this.qtdePorPagina);
+			System.out.println("### Quantidade de elementos por página = " + this.qtdePorPagina + "###");
+			
+			String senha = "123456";
+			String senhaEncoded = SenhaUtils.gerarBCrypty(senha);
+			System.out.println("Senha encoded : " + senhaEncoded);
+			
+			senhaEncoded = SenhaUtils.gerarBCrypty(senha);
+			System.out.println("Senha encoded (De novo): " + senhaEncoded);
+			
+			System.out.println("Senha válida? " + SenhaUtils.senhaValida(senha, senhaEncoded));
 		};
 	}
 }
